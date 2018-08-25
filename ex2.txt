@@ -1,0 +1,9 @@
+    1  whoami
+    2  pwd
+    3  cd Desktop
+    4  cd week1
+    5  hostname
+    6  head < ex1.txt
+    7  touch ex2.txt
+    8  ls
+    9  history > ex2.txt
