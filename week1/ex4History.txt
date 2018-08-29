@@ -1,0 +1,1 @@
+  1  gcc main.c -o ex4  2  ./ex4  3  touch ex4History.txt  4  history > ex4History.txt

@@ -1,0 +1,1 @@
+  1  cd Desktop  2  cd week1  3  history < ex1.txt  4  history > ex1.txt  5  cd Desktop  6  mkdir week1  7  touch ex1.txt  8  cd week1  9  touch ex1.txt  10  find usr\bin -name '*gcc*' | sort -r   11  cd /  12  find usr\bin -name '*gcc*' | sort -r   13  find usr/bin -name '*gcc*' | sort -r   14  history > ex1.txt  15  cd home/arina  16  cd Desktop/week1  17  history > ex1.txt
