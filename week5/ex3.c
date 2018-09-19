@@ -1,55 +1,64 @@
 #include <stdio.h>
 #include <pthread.h>
+#include <stdlib.h>
+#include <unistd.h>
 
-#define MAX 10000000000
-pthread_mutex_t the_mutex;
-pthread_cond_t condc, condp;
-int buffer = 0;
+#define BUFFERSIZE 7
 
-void* producer(void *ptr) {
-    int i;
+int itemCount = 0;
+pthread_cond_t full, empty;
 
-    for (i = 1; i <= MAX; i++) {
-        pthread_mutex_lock(&the_mutex);
-        while (buffer != 0)
-            pthread_cond_wait(&condp, &the_mutex);
-        buffer = i;
-        pthread_cond_signal(&condc);
-        pthread_mutex_unlock(&the_mutex);
+void* produce(void *arg) {
+    while (1) {
+        if (itemCount == BUFFERSIZE) {
+            printf("Producer sleeps\n");
+            usleep(10000000);
+
+        }
+        itemCount++;
+        printf("Item produced %d\n", itemCount);
+        if (itemCount == 1) {
+            printf("Wake up consumer\n");
+            pthread_cond_signal(&full);
+        }
     }
-    pthread_exit(0);
+
 }
 
-void* consumer(void *ptr) {
-    int i;
+void* consume(void *arg){
+    int item;
+    while(1){
+        if (itemCount==0){
+            printf("Consumer sleeps\n");
+            usleep(100000000);
+        }
+        itemCount--;
+        printf("Item consumed %d\n", itemCount);
+        if (itemCount==BUFFERSIZE-1)
+            printf("Wake up producer\n");
+            pthread_cond_signal(&empty);
 
-    for (i = 1; i <= MAX; i++) {
-        pthread_mutex_lock(&the_mutex);
-        while (buffer == 0)
-            pthread_cond_wait(&condc, &the_mutex);
-        buffer = 0;
-        pthread_cond_signal(&condp);
-        pthread_mutex_unlock(&the_mutex);
     }
-    pthread_exit(0);
 }
 
-int main(int argc, char **argv) {
-    pthread_t pro, con;
-
-    pthread_mutex_init(&the_mutex, NULL);
-    pthread_cond_init(&condc, NULL);
-    pthread_cond_init(&condp, NULL);
-
-    pthread_create(&con, NULL, consumer, NULL);
-    pthread_create(&pro, NULL, producer, NULL);
-
-    pthread_join(&con, NULL);
-    pthread_join(&pro, NULL);
+int main(){
 
 
-    pthread_mutex_destroy(&the_mutex);
-    pthread_cond_destroy(&condc);
-    pthread_cond_destroy(&condp);
+    pthread_t producer, consumer;
+    pthread_cond_init(&full, 0);
+    pthread_cond_init(&empty, 0);
+
+
+
+    pthread_create(&producer, NULL, produce, NULL);
+    pthread_create(&consumer, NULL, consume, NULL);
+
+    pthread_join(producer, 0);
+    pthread_join(consumer, 0);
+
+    pthread_cond_destroy(&full);
+    pthread_cond_destroy(&empty);
+
+
 
 }
