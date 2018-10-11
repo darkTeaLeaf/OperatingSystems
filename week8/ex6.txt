@@ -1,0 +1,2 @@
+Pages are 8KB. It is 2^(3+10). So, offset is 13. 16-13=3 bits. 3 bits are
+distinguish the pages. So, 2^3=8. 8 pages can be stored in table.

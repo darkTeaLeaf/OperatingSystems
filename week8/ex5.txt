@@ -1,0 +1,4 @@
+Physical address directly refer to an address in physical memory. Virtual 
+address is an address in page table which maps the virtual address to physical
+adress. So, virtual address can be translated one or more times in order to 
+produce a physical address.
