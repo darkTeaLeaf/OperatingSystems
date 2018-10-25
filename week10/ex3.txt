@@ -1,0 +1,8 @@
+-rw-r--r-- 1 arina arina 0 окт 25 21:36 _ex3.txt
+-rwxr--rwx 1 arina arina 0 окт 25 21:36 _ex3.txt
+-rwxrwxrwx 1 arina arina 0 окт 25 21:36 _ex3.txt
+
+Answer:
+660 - read and write permissions for user and group
+775 - read, write and execute permissions for user and group, read and execute for others
+777 - read. write and execute permissions for all

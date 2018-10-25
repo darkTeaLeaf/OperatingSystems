@@ -1,0 +1,7 @@
+Output:
+./_ex2.txt
+
+Commands:
+link ~/Desktop/week2/file.txt _ex2.txt
+find -inum 142721
+find -inum 142721 -exec rm {} \;
