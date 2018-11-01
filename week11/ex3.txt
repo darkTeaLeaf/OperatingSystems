@@ -1,0 +1,2 @@
+Answer:
+Because there is a linear buffer in stdlib, and it becomes free after "/n" character. So, in the first example we see two times "hello", and in the second example buffer becomes free and we see "hello" only once.
