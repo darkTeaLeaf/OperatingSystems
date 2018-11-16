@@ -1,0 +1,13 @@
+Recovery:
+Though preemption: it can be used when it's possible to temporarily take a resource away from its current owner and give it to another process.
+Recovering this way is frequently difficult or impossible due to the difficulty to determine which processes have resources
+that can easily be taken back.
+Through rollback: a process that owns a necessary resource is rolled back to a point in time before it acquired that resource by starting at one
+of its earlier checkpoints.It can be used when deadlocks are very likely but this strategy takes much memory space and time.
+Through Killing Processes: the simplest way to break a deadlock. Where possible, it is best to kill a process that can be rerun from the beginning
+with no ill effects. It is difficult to determine such a process though.
+
+Avoidance: it is possible only if certain information is available in advance.
+
+Prevention: deadlock avoidance is essentially impossible, because it requires information about future requests, which is not known.
+So, it's the best strategy to prevent the deadlocks by taking into consideration the 4 conditions for deadlocks to appear.
